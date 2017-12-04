@@ -1,0 +1,34 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Friends</ion-title>
+    <ion-buttons end>
+      <button (click)="showAddFriend()" ion-button class="headerText" >Add Friend</button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+
+    <p class="addFriendsMessage" *ngIf="friendsLength == 0">PubParty is lonely without friends. Add a few!</p>
+    <ion-list *ngIf="friends">
+    
+   
+    
+    <ion-item *ngFor="let friend of friends" class="item" no-lines>
+        <ion-thumbnail item-start>
+            <img src="../assets/imgs/profile.jpg">
+          </ion-thumbnail>
+      <span  (click)="viewProfile()">{{friend.fname}} {{friend.lname}}</span>
+      <p>{{friend.school}}</p>
+        <button (click)="showFriendOptions()" ion-button item-end clear>
+          <ion-icon color="dark"  name="md-more"></ion-icon>
+        </button>
+    </ion-item>
+
+  </ion-list>
+
+</ion-content>

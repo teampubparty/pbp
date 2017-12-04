@@ -1,0 +1,36 @@
+
+<ion-content>
+
+  <ion-fab top left mini>
+    <button ion-button clear (click)="closePage()">
+      <ion-icon class="closeButton" name="close"></ion-icon>
+    </button>
+  </ion-fab>
+
+  <div style="color:skyblue" class="welcomeFormHeader">Thank You For Joining</div>
+
+  <form padding #registerForm="ngForm" class="welcomeForm" >
+    <ion-list>
+          <ion-item class="formItem" >
+            <ion-input ngModel  placeholder="First Name" name="fname"></ion-input>
+        </ion-item>
+          <ion-item class="formItem">
+              <ion-input ngModel  placeholder="Last Name" name="lname"></ion-input>
+           </ion-item>
+           <ion-item class="formItem">
+              <ion-input ngModel placeholder="Age" name="age"></ion-input>
+            </ion-item>
+          <ion-item class="formItem">
+            <ion-input ngModel placeholder="School" name="school"></ion-input>
+          </ion-item>
+            <ion-item class="formItem">
+                <ion-input ngModel placeholder="Email" type="email"  name="email"></ion-input>
+             </ion-item>
+            <ion-item class="formItem">
+                <ion-input ngModel placeholder="Password" type="password"  name="password"></ion-input>
+            </ion-item>
+            <button (click)="register(registerForm)" margin-top ion-button block color="secondary">Create Account</button>
+            <p text-center>By creating an account you agree to PubPary's <b>Terms and Conditions</b> and <b>Rules and Agreements</b></p>
+    </ion-list>
+  </form>
+</ion-content>

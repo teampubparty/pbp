@@ -1,0 +1,32 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title  *ngIf="user">{{user.fname}} {{user.lname}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  
+<ion-list *ngIf="user">
+  <ion-item  no-lines>
+    <strong>School</strong> <p>{{user.school}}</p>
+  </ion-item>
+  <ion-item  no-lines>
+    <strong>Email</strong> <p>{{user.email}}</p>
+  </ion-item>
+  <ion-item  no-lines>
+      <strong>Age</strong> <p>{{user.age}}</p>
+  </ion-item>
+  <ion-item  no-lines>
+      <strong>Interests</strong> <p>{{user.interests}}</p>
+      <button item-end ion-button (click)="updateInterest()" clear>edit</button>
+  </ion-item>
+  <ion-item  no-lines>
+      <strong>Major</strong> <p>{{user.major}}</p>
+      <button item-end ion-button (click)="updateMajor()" clear>edit</button>
+  </ion-item>
+</ion-list>
+</ion-content>

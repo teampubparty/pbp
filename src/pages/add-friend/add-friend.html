@@ -1,0 +1,34 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-buttons start>
+      <button (click)="closePage()" ion-button>
+        <ion-icon style="font-size: 40px" name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>Add Friend</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content >
+    <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+
+    <ion-list [virtualScroll]="allUsers" [headerFn]="myHeaderFn" margin-top>
+      <ion-item-divider sticky *virtualHeader="let header">
+         {{ header }}
+        </ion-item-divider>
+      <ion-item *virtualItem="let user" no-lines >
+      <ion-thumbnail item-start>
+          <img src="img/thumbnail-totoro.png">
+        </ion-thumbnail>
+        {{user.fname}} {{user.lname}}
+        <p>{{user.school}}</p>
+        <p>{{user.email}}</p>
+        <button (click)="addFriend(user)" outline item-end ion-button>
+          Add
+        </button>
+      </ion-item>
+    </ion-list>
+</ion-content>

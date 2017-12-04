@@ -1,0 +1,24 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>VerificationPage</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+<div class="headerText">
+  A confirmation email has been sent to <b>{{email}}</b>.
+  Please confirm email before logging in. 
+</div>
+<div class="verificationOptions">
+<ion-list>
+  <ion-item class="formItem" (click)="changeEmail()">Change Email</ion-item>  
+  <ion-item class="formItem" (click)="sendEmail()">Resend Email</ion-item>
+  <ion-item class="formItem" (click)="logOut()">Login</ion-item>
+</ion-list>  
+    
+    
+</div>
+</ion-content>

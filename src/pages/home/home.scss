@@ -1,0 +1,20 @@
+page-home {
+
+
+    ion-row.buttons {
+        ion-col {
+          padding-top: 2vh;
+          padding-bottom: 2vh;
+          font-size: 115%;
+        }
+
+        ion-col:first-child {
+
+          color: color($colors, light);
+        }
+    
+        ion-col:last-child {
+          color: color($colors, light);
+        }
+    }
+}

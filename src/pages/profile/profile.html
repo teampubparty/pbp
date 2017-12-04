@@ -1,0 +1,28 @@
+
+<ion-header>
+  <ion-navbar>
+   <ion-title *ngIf="user">{{user.fname}} {{user.lname}}</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content >
+
+
+       <img class="profliePic" src="../assets/imgs/profile.jpg">
+          <img class="cover" src="../assets/imgs/profile.jpg">
+
+
+
+
+  <ion-row margin-bottom text-center>
+    <ion-col tappable (click)="showMessages()">Messages</ion-col>
+    <ion-col tappable (click)="showFriends()">Friends</ion-col>
+    <ion-col tappable (click)="showAbout()">About</ion-col>
+  </ion-row>
+  <ion-list>
+        <ion-list-header no-lines class="listHeader">Created</ion-list-header>
+        <ion-list-header no-lines class="listHeader">Going</ion-list-header>
+        <ion-list-header no-lines class="listHeader">Invited</ion-list-header>
+        <ion-list-header no-lines class="listHeader">Attended</ion-list-header>
+      
+  </ion-list>
+</ion-content>
