@@ -25,10 +25,13 @@ export class FriendsPage {
 
 friends:any;
 friendsLength:number;
+oldFriend:any;
+newFriend:any;
 
   getFriends(){
     firebase.firestore()
-    .collection("users/" + firebase.auth().currentUser.uid + "/friends")
+    .collection("users/" + firebase.auth().currentUser.uid + "/friends/")
+    .orderBy("status")
     .onSnapshot((usersSnap)=>{
       let users = [];
       usersSnap.forEach((user)=>{
@@ -36,9 +39,6 @@ friendsLength:number;
       })
       this.friends = users;
       this.friendsLength = this.friends.length;
-      console.log(users);
-      console.log(this.friends);
-      console.log(this.friendsLength);
     })
   }
   showAddFriend(){
@@ -57,5 +57,15 @@ friendsLength:number;
 
   viewProfile(){
     this.navCtrl.push("ProfilePage")
+  }
+
+  myHeaderFn(friend) {
+    this.oldFriend = this.newFriend;
+    this.newFriend = friend.status;
+    if (this.oldFriend != this.newFriend) {
+      
+      return this.newFriend;
+    }
+    return null;
   }
 }

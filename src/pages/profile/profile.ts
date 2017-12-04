@@ -13,7 +13,7 @@ export class ProfilePage {
   }
 
   user:any;
-
+  menuPage= "MenuPage";
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProfilePage');
     this.getUser();

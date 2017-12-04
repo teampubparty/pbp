@@ -36,14 +36,14 @@ export class AddFriendPage {
         lname: user.lname,
         school: user.school,
         uid: user.uid,
-        status: "pending",
+        status: "Pending Request",
       };
       let requestie= {
         fname: currentUser.fname,
         lname: currentUser.lname,
         school: currentUser.school,
         uid: currentUser.uid,
-        status: "pending",
+        status: "Friend Requests",
       };
        firebase.firestore()
        .doc("users/" + currentUser.uid + "/friends/" + user.uid).set(requestor);

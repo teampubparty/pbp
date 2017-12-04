@@ -14,11 +14,11 @@
 <ion-content>
 
     <p class="addFriendsMessage" *ngIf="friendsLength == 0">PubParty is lonely without friends. Add a few!</p>
-    <ion-list *ngIf="friends">
-    
-   
-    
-    <ion-item *ngFor="let friend of friends" class="item" no-lines>
+    <ion-list   [virtualScroll]="friends" [headerFn]="myHeaderFn">
+      <ion-item-divider sticky *virtualHeader="let header">
+        {{ header }}
+       </ion-item-divider>
+    <ion-item *virtualItem="let friend" class="item" no-lines >
         <ion-thumbnail item-start>
             <img src="../assets/imgs/profile.jpg">
           </ion-thumbnail>
