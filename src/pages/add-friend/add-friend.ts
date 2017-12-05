@@ -1,3 +1,5 @@
+import { ToastController } from 'ionic-angular/components/toast/toast-controller';
+import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import * as firebase from 'firebase';
@@ -10,18 +12,46 @@ import 'firebase/firestore';
 })
 export class AddFriendPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(
+    public toastCtrl: ToastController,
+    public alertCtrl: AlertController,
+    public navCtrl: NavController, 
+    public navParams: NavParams) {
+    
+
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AddFriendPage');
     this.getAllUsers();
+    
   }
 
   allUsers = [];
   schools: any;
   oldSchool;
   newSchool;
+
+
+  confirmAddFriend(user){
+    this.alertCtrl.create({
+      title: "Send Friend Reqeust",
+      message: "Are you sure you want to send a Friend Request",
+      buttons: [{
+        text: "Cancel"
+      },{
+        text: "Send",
+        handler: data=>{
+          this.addFriend(user)
+          this.toastCtrl.create({
+            message: "Friend Request Sent",
+            duration: 3000,
+            position: "top"
+          }).present()
+        }
+      }]
+    }).present()
+  }
 
   addFriend(user){
 
@@ -49,6 +79,7 @@ export class AddFriendPage {
        firebase.firestore()
        .doc("users/" + user.uid + "/friends/" + currentUser.uid).set(requestie);
 
+       this.getAllUsers()
 
     })
   
@@ -75,21 +106,18 @@ export class AddFriendPage {
           users.push(user.data());
         
       })
-      // console.log(friends);
-      // console.log(users)
+     
   
  
-      var i;
-      var o;
-      for( o = 0; o < friends.length; o++){
-        for (i = 0; i < users.length; i++) {
-          if (users[i].uid != friends[o].uid) {
-            this.allUsers.push(users[i])
-          } else {
-            
-                      }
-      }
-      }
+      friends.forEach((friend)=>{
+        users.forEach((user)=>{
+          if(friend.uid == user.uid || firebase.auth().currentUser.uid == user.uid){
+            let index = users.indexOf(user);
+            users.splice(index, 1)
+          }
+        })
+      })
+      this.allUsers = users;
 
     })
   }

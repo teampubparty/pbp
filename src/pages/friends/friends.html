@@ -13,12 +13,40 @@
 
 <ion-content>
 
-    <p class="addFriendsMessage" *ngIf="friendsLength == 0">PubParty is lonely without friends. Add a few!</p>
-    <ion-list   [virtualScroll]="friends" [headerFn]="myHeaderFn">
-      <ion-item-divider sticky *virtualHeader="let header">
-        {{ header }}
-       </ion-item-divider>
-    <ion-item *virtualItem="let friend" class="item" no-lines >
+    <p class="addFriendsMessage" *ngIf="activity == 0">PubParty is lonely without friends. Add a few!</p>
+  
+    <div id="pending" *ngIf="pendingLength != 0">
+      <ion-list-header>Pending</ion-list-header>
+      <ion-item *ngFor="let pending of pendingFriends" class="item" no-lines >
+        <ion-thumbnail item-start>
+            <img src="../assets/imgs/profile.jpg">
+          </ion-thumbnail>
+      <span  (click)="viewProfile()">{{pending.fname}} {{pending.lname}}</span>
+      <p>{{pending.school}}</p>
+        <button (click)="showFriendOptions()" ion-button item-end clear>
+          Cancel Request
+        </button>
+    </ion-item>
+    </div>
+    <div id="requests" *ngIf="requestsLength != 0">
+        <ion-list-header>Requests</ion-list-header>
+      <ion-item *ngFor="let request of friendRequests" class="item" no-lines >
+        <ion-thumbnail item-start>
+            <img src="../assets/imgs/profile.jpg">
+          </ion-thumbnail>
+      <span  (click)="viewProfile()">{{request.fname}} {{request.lname}}</span>
+      <p>{{request.school}}</p>
+        <button (click)="showFriendOptions()" ion-button item-end clear>
+          Add
+        </button>
+        <button (click)="showFriendOptions()" ion-button item-end clear>
+          Delete
+        </button>
+    </ion-item>
+    </div>
+    <div id="friends" *ngIf="friendsLength != 0">
+        <ion-list-header>Friends</ion-list-header>
+      <ion-item *ngFor="let friend of friends" class="item" no-lines >
         <ion-thumbnail item-start>
             <img src="../assets/imgs/profile.jpg">
           </ion-thumbnail>
@@ -28,7 +56,10 @@
           <ion-icon color="dark"  name="md-more"></ion-icon>
         </button>
     </ion-item>
+    </div>
 
-  </ion-list>
+   
+    
+
 
 </ion-content>
