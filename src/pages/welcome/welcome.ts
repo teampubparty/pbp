@@ -23,8 +23,6 @@ export class WelcomePage {
 
   checkLoggedin(){
     let user = firebase.auth().onAuthStateChanged((user)=>{
-      console.log(user);
-      console.log(user.emailVerified);
       if(user && user.emailVerified){
         this.navCtrl.setRoot("TabsPage")
       }

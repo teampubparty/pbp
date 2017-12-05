@@ -18,7 +18,7 @@ export class AddFriendPage {
     this.getAllUsers();
   }
 
-  allUsers:any;
+  allUsers = [];
   schools: any;
   oldSchool;
   newSchool;
@@ -29,7 +29,6 @@ export class AddFriendPage {
     firebase.firestore().doc("users/" + firebase.auth().currentUser.uid)
     .get().then((u)=>{
       currentUser = u.data();
-      console.log(currentUser)
 
       let requestor={
         fname: user.fname,
@@ -56,13 +55,42 @@ export class AddFriendPage {
 
   }
   getAllUsers() {
-    firebase.firestore().collection("users/").orderBy("school")
-    .onSnapshot((usersSnap)=>{
-      let users = [];
-      usersSnap.forEach((user)=>{
-        users.push(user.data());
+
+    let friends = [];
+    let users = [];
+    
+    firebase.firestore().collection("users/" + firebase.auth().currentUser.uid + "/friends/")
+    .onSnapshot((friendsSnap)=>{
+      friendsSnap.forEach((friend)=>{
+        friends.push(friend.data());
       })
-      this.allUsers = users;
+    })
+
+    firebase.firestore().collection("users/")
+    .orderBy("school")
+    .onSnapshot((usersSnap)=>{
+      
+      usersSnap.forEach((user)=>{
+
+          users.push(user.data());
+        
+      })
+      // console.log(friends);
+      // console.log(users)
+  
+ 
+      var i;
+      var o;
+      for( o = 0; o < friends.length; o++){
+        for (i = 0; i < users.length; i++) {
+          if (users[i].uid != friends[o].uid) {
+            this.allUsers.push(users[i])
+          } else {
+            
+                      }
+      }
+      }
+
     })
   }
   closePage(){

@@ -1,8 +1,11 @@
 <ion-header>
   <ion-navbar>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
+    <ion-buttons end>
+        <button ion-button [navPush]="menuPage">
+            <ion-icon name="menu"></ion-icon>
+          </button>
+    </ion-buttons>
+
    <ion-title *ngIf="user">{{user.fname}} {{user.lname}}</ion-title>
   </ion-navbar>
 </ion-header>
