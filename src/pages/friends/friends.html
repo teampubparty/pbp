@@ -23,7 +23,7 @@
           </ion-thumbnail>
       <span  (click)="viewProfile()">{{pending.fname}} {{pending.lname}}</span>
       <p>{{pending.school}}</p>
-        <button (click)="showFriendOptions()" ion-button item-end clear>
+        <button (click)="confirmCancelPendingRequest(pending)" ion-button item-end clear>
           Cancel Request
         </button>
     </ion-item>
@@ -36,10 +36,10 @@
           </ion-thumbnail>
       <span  (click)="viewProfile()">{{request.fname}} {{request.lname}}</span>
       <p>{{request.school}}</p>
-        <button (click)="showFriendOptions()" ion-button item-end clear>
-          Add
+        <button (click)="confirmAcceptRequest(request)" ion-button item-end clear>
+          Accept
         </button>
-        <button (click)="showFriendOptions()" ion-button item-end clear>
+        <button (click)="  confirmDeleteRequest(request)" ion-button item-end clear>
           Delete
         </button>
     </ion-item>
@@ -52,7 +52,7 @@
           </ion-thumbnail>
       <span  (click)="viewProfile()">{{friend.fname}} {{friend.lname}}</span>
       <p>{{friend.school}}</p>
-        <button (click)="showFriendOptions()" ion-button item-end clear>
+        <button (click)="showFriendOptions(friend)" ion-button item-end clear>
           <ion-icon color="dark"  name="md-more"></ion-icon>
         </button>
     </ion-item>
