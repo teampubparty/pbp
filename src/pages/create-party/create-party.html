@@ -13,7 +13,10 @@
 </ion-header>
 
 
-<ion-content >
+<ion-content>
+  <form #createPartyForm="ngForm">
+
+  
   <div (click)="updateCover()" >
     <img class="coverImg" src="../assets/imgs/defaultparty.jpg">
     <p class="addPartyCovertxt">Add Party Cover</p>
@@ -22,33 +25,37 @@
   <ion-list-header no-lines class="listHeader">Event Details</ion-list-header>
   <ion-item no-lines  class="formItem">
     <ion-label>Name</ion-label>
-    <ion-input></ion-input>
+    <ion-input name="name" ngModel></ion-input>
   </ion-item>
-  <ion-item no-lines class="formItem">
+  <ion-item  no-lines class="formItem">
       <ion-label>Date</ion-label>
-      <ion-input></ion-input>
+      <ion-datetime displayFormat="MM/DD/YYYY" ngModel pickerFormat="MMM/DD/YYYY" doneText="Select" [min]="today" [max]="2018"  name="date"></ion-datetime>
     </ion-item>
     <ion-item no-lines class="formItem">
-        <ion-label>Time</ion-label>
-        <ion-input></ion-input>
-      </ion-item>
+      <ion-label>Time</ion-label>
+      <ion-datetime displayFormat="hh:mm A" ngModel minuteValues="0,15,30,45" doneText="Select" pickerFormat="hh:mm A" name="time"></ion-datetime>
+    </ion-item>
+
+        
+   
     <ion-item no-lines class="formItem">
         <ion-label>Location</ion-label>
-        <ion-input></ion-input>
+        <ion-input ngModel name="location"></ion-input>
       </ion-item>
       <ion-item no-lines class="formItem">
           <ion-label>Directions</ion-label>
-          <ion-textarea rows="6"></ion-textarea>
+          <ion-textarea ngModel name="directions" rows="6"></ion-textarea>
       </ion-item>
       <ion-list-header class="listHeader headerText" no-lines>Tell guests what they will be doing</ion-list-header>
       <ion-item no-lines class="formItem">
-          <ion-textarea  rows="6"></ion-textarea>
+          <ion-textarea name="activity" ngModel  rows="6"></ion-textarea>
       </ion-item>
       <ion-list-header no-lines class="listHeader headerText">Let guests know the rules</ion-list-header>
       <ion-item  no-lines margin-bottom>
-          <ion-textarea  rows="6"></ion-textarea>
+          <ion-textarea name="rules" ngModel  rows="6"></ion-textarea>
       </ion-item>
       <p text-center><i> PubParty's <b>terms</b> and <b>conditions</b></i></p>
-      <button ion-button block>Create</button>
+      <button ion-button (click)="confirmCreateParty(createPartyForm)" block>Create</button>
 </ion-list>
+</form >
 </ion-content>
