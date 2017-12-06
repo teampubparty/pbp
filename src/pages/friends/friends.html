@@ -13,7 +13,12 @@
 
 <ion-content>
 
-    <p class="addFriendsMessage" *ngIf="activity == 0">PubParty is lonely without friends. Add a few!</p>
+    <p class="addFriendsMessage" 
+    *ngIf="
+    pendingLength == 0 &&
+    requestsLength == 0 &&
+    friendsLength == 0
+     ">PubParty is lonely without friends. Add a few!</p>
   
     <div id="pending" *ngIf="pendingLength != 0">
       <ion-list-header>Pending</ion-list-header>

@@ -27,8 +27,7 @@ export class FriendsPage {
     this.getFriends();
     this.getFriendRequest();
     this.getPendingFriends();
-    this.activity = this.friendsLength + this.requestsLength + this.pendingLength;
-    console.log(this.friends, this.activity, this.pendingFriends, this.friendRequests)
+ 
   }
 
 friends:any;
