@@ -36,8 +36,8 @@ export class CreatePartyPage {
   }
   createParty(partyForm){
     let form = partyForm.value;
-    firebase.firestore().collection("users/" + firebase.auth().currentUser.uid + "/parties/created/" + form.name)
-    .add({
+    let partyRef = firebase.firestore().collection("/parties/");
+    let data = {
         name: form.name,
         date: form.date,
         time: form.time,
@@ -45,9 +45,12 @@ export class CreatePartyPage {
         directions: form.directions,
         activity: form.activity,
         rules: form.rules,
+        cid: firebase.auth().currentUser.uid,
         going: [],
         invited: [],
-    }).then((sucess)=>{
+    }
+    partyRef.add(data).then((sucess)=>{
+      this.navCtrl.pop();
       this.toastCtrl.create({
         message: "Your party has been created",
         duration: 3000,

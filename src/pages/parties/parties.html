@@ -14,78 +14,21 @@
 
 
 <ion-content >
-    <div padding >
-        <ion-segment [(ngModel)]="parties">
-          <ion-segment-button  selected value="friends">
-            Friends
-          </ion-segment-button>
-          <ion-segment-button value="trending">
-            Trending
-          </ion-segment-button>
-        </ion-segment>
-      </div>
-      
-<ion-card>
+
+<ion-card *ngFor="let party of friendsParties">
   <ion-item [navPush]="PartyPage">
     <ion-avatar item-start>
       <img src="./assets/imgs/avatar.png">
     </ion-avatar>
-    <h2>Adiontae Gerron</h2>
-    <p>Dec 31</p>
+    <h2>{{party.name}}</h2>
+    <p>{{party.date}} {{party.time}}</p>
   </ion-item>
 
   <img src=".//assets/imgs/party.jpg">
 
   <ion-card-content>
-    <p>Wait a minute. Wait a minute, Doc. Uhhh... Are you telling me that you built a time machine... out of a DeLorean?! Whoa. This is heavy.</p>
+    <p>{{party.activity}}</p>
   </ion-card-content>
 
 </ion-card>
-<ion-card>
-  <ion-item>
-    <ion-avatar item-start>
-      <img src="./assets/imgs/avatar.png">
-    </ion-avatar>
-    <h2>Adiontae Gerron</h2>
-    <p>Dec 31</p>
-  </ion-item>
-
-  <img src=".//assets/imgs/party.jpg">
-
-  <ion-card-content>
-    <p>Wait a minute. Wait a minute, Doc. Uhhh... Are you telling me that you built a time machine... out of a DeLorean?! Whoa. This is heavy.</p>
-  </ion-card-content>
-
-</ion-card><ion-card>
-  <ion-item>
-    <ion-avatar item-start>
-      <img src="./assets/imgs/avatar.png">
-    </ion-avatar>
-    <h2>Adiontae Gerron</h2>
-    <p>Dec 31</p>
-  </ion-item>
-
-  <img src=".//assets/imgs/party.jpg">
-
-  <ion-card-content>
-    <p>Wait a minute. Wait a minute, Doc. Uhhh... Are you telling me that you built a time machine... out of a DeLorean?! Whoa. This is heavy.</p>
-  </ion-card-content>
-
-</ion-card><ion-card>
-  <ion-item>
-    <ion-avatar item-start>
-      <img src="./assets/imgs/avatar.png">
-    </ion-avatar>
-    <h2>Adiontae Gerron</h2>
-    <p>Dec 31</p>
-  </ion-item>
-
-  <img src=".//assets/imgs/party.jpg">
-
-  <ion-card-content>
-    <p>Wait a minute. Wait a minute, Doc. Uhhh... Are you telling me that you built a time machine... out of a DeLorean?! Whoa. This is heavy.</p>
-  </ion-card-content>
-
-</ion-card>
-
 </ion-content>

@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ModalController } from 'ionic-angular/components/modal/modal-controller';
-
+import * as firebase from 'firebase';
+import 'firebase/firestore';
 @IonicPage()
 @Component({
   selector: 'page-parties',
@@ -16,21 +17,44 @@ export class PartiesPage {
   }
 
   view:string;
+  friendsParties:any;
+  friends = [];
 
   PartyPage = "PartyPage"
   ionViewDidLoad() {
     console.log('ionViewDidLoad PartiesPage');
-    this.view = 'friends';
+    this.getFriends();
+    this.getFriendsParties();
   }
 
   showCreateParty(){
     this.modalCtrl.create("CreatePartyPage").present();
   }
 
- changeView(e) {
-  e.target.bgColor = "darkblue";
-  console.log(e.target.class)
-  
+getFriends(){
+  firebase.firestore().collection("users/" + firebase.auth().currentUser.uid + "/friends/")
+  .onSnapshot((friendsSnap)=>{
+    friendsSnap.forEach((friend)=>{
+      this.friends.push(friend.data());
+    })
+  })
+}
+
+ getFriendsParties(){
+   
+  this.friends.forEach((friend)=>{
+
+    firebase.firestore().collection("/parties/")
+    .onSnapshot((partiesSnap)=>{
+      partiesSnap.forEach((party)=>{
+        console.log(party.data().uid, friend.uid)
+        if(party.data().cid == friend.uid){
+          this.friendsParties.push(party.data())
+        }
+      })
+  })
+  })
+  console.log(this.friendsParties)
  }
    
 }
