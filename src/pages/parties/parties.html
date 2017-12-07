@@ -14,20 +14,29 @@
 
 
 <ion-content >
+<ion-refresher (ionRefresh)="doRefresh($event)">
+  <ion-refresher-content>
+  </ion-refresher-content>
+</ion-refresher>
+
 <ion-card *ngFor="let p of friendsParties">
-  <ion-item [navPush]="PartyPage">
-    <ion-avatar item-start>
-      <img src="./assets/imgs/avatar.png">
-    </ion-avatar>
-    <h2>{{p.name}}</h2>
-    <p>{{p.date}} {{p.time}}</p>
-  </ion-item>
+    <ion-item [navPush]="PartyPage">
+      <ion-avatar item-start>
+        <img src="./assets/imgs/avatar.png">
+      </ion-avatar>
+      <h2>{{p.name}}</h2>
+      <p>{{p.date}} {{p.time}}</p>
+    </ion-item>
+  
+    <img src=".//assets/imgs/party.jpg">
+  
+    <ion-card-content>
+      <p>{{p.activity}}</p>
+    </ion-card-content>
+  </ion-card>
 
-  <img src=".//assets/imgs/party.jpg">
 
-  <ion-card-content>
-    <p>{{p.activity}}</p>
-  </ion-card-content>
-
-</ion-card>
+  <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>
