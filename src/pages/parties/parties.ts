@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 import { ModalController } from 'ionic-angular/components/modal/modal-controller';
 import * as firebase from 'firebase';
 import 'firebase/firestore';
@@ -17,44 +17,55 @@ export class PartiesPage {
   }
 
   view:string;
-  friendsParties:any;
+  friendsParties = [];
   friends = [];
-
   PartyPage = "PartyPage"
   ionViewDidLoad() {
     console.log('ionViewDidLoad PartiesPage');
     this.getFriends();
-    this.getFriendsParties();
+    
+    
   }
 
   showCreateParty(){
     this.modalCtrl.create("CreatePartyPage").present();
   }
-
+  FriendsPartiesComponent = "FriendsPartiesComponent";
 getFriends(){
+  let parties = [];
+  let friends = [];
+  
+
+  // get friends
   firebase.firestore().collection("users/" + firebase.auth().currentUser.uid + "/friends/")
-  .onSnapshot((friendsSnap)=>{
-    friendsSnap.forEach((friend)=>{
-      this.friends.push(friend.data());
+  
+  .onSnapshot((friendSnap)=>{
+    
+    friendSnap.forEach((friend)=>{
+      friends.push(friend.data());
     })
   })
-}
 
- getFriendsParties(){
-   
-  this.friends.forEach((friend)=>{
+  // get parties
+  firebase.firestore().collection("/parties/")
+  .onSnapshot((partiesSnap)=>{
+    partiesSnap.forEach((party)=>{
+      parties.push(party.data());
+    })
 
-    firebase.firestore().collection("/parties/")
-    .onSnapshot((partiesSnap)=>{
-      partiesSnap.forEach((party)=>{
-        console.log(party.data().uid, friend.uid)
-        if(party.data().cid == friend.uid){
-          this.friendsParties.push(party.data())
+    friends.forEach((friend)=>{
+      parties.forEach((party)=>{
+        if(friend.uid == party.cid){
+          this.friendsParties.push(party);
         }
       })
+    })
+  
   })
-  })
-  console.log(this.friendsParties)
- }
-   
+  
+ console.log(friends);
+  console.log(this.friendsParties);
+}
+
+  
 }

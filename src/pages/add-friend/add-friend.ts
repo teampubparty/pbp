@@ -85,6 +85,8 @@ export class AddFriendPage {
   
 
   }
+
+  
   getAllUsers() {
 
     let friends = [];
@@ -108,9 +110,10 @@ export class AddFriendPage {
       })
      
   
- 
+
       friends.forEach((friend)=>{
         users.forEach((user)=>{
+         
           if(friend.uid == user.uid || firebase.auth().currentUser.uid == user.uid){
             let index = users.indexOf(user);
             users.splice(index, 1)
@@ -121,6 +124,8 @@ export class AddFriendPage {
 
     })
   }
+
+
   closePage(){
     this.navCtrl.pop();
   }
