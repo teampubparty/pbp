@@ -1,25 +1,35 @@
 
 <ion-header>
   <ion-navbar>
-    
+    <ion-title *ngIf="party">{{party.name}}</ion-title>
   </ion-navbar>
 </ion-header>
-<ion-content >
-  <img src="../assets/imgs/party.jpg" height="250px" width="100%">
-  <ion-list>
-        <ion-list-header class="listHeader" no-lines>Description</ion-list-header>
-        <ion-item no-lines>We will be having fun Enough Said</ion-item>
-        <ion-list-header class="listHeader"  no-lines>Time</ion-list-header>
-        <ion-item no-lines>3:00pm - 9:00pm</ion-item>
-        <ion-list-header class="listHeader"  no-lines>What we will be doing</ion-list-header>
-        <ion-item no-lines>lf sal;df sf sal;fkjsal;dk fl;ska </ion-item>
-        <ion-list-header class="listHeader"  no-lines>Rules</ion-list-header>
-        <ion-item no-lines>Dont fuck my shit up</ion-item>
-        <ion-list-header class="listHeader"  no-lines>Location</ion-list-header>
-        <ion-item no-lines>12134 S 29th ST</ion-item>
-        <ion-list-header class="listHeader"  no-lines>Directions</ion-list-header>
-        <ion-item no-lines>Just Come in</ion-item>
-        <ion-list-header class="listHeader"  no-lines>Going (6)</ion-list-header>
+
+<ion-content>
+
+ 
+<div *ngIf="party">
+    <img src="../assets/imgs/party.jpg" height="250px" width="100%">
+  <ion-row text-center margin-bottom>
+    <ion-col (click)="confirmRequestInvite()" >Request Invite</ion-col><ion-col>Message Host</ion-col>
+  </ion-row>
+    <ion-list>
+          <ion-list-header class="listHeader"  no-lines>What we will be doing</ion-list-header>
+          <ion-item no-lines>{{party.activity}}</ion-item>
+          <ion-list-header class="listHeader"  no-lines>Time</ion-list-header>
+          <ion-item no-lines>{{party.time}}</ion-item>
+          <ion-list-header class="listHeader"  no-lines>Rules</ion-list-header>
+          <ion-item no-lines>{{party.rules}}</ion-item>
+          <ion-list-header class="listHeader"  no-lines>Location</ion-list-header>
+          <ion-item no-lines>{{party.location}}</ion-item>
+          <ion-list-header class="listHeader"  no-lines>Directions</ion-list-header>
+          <ion-item no-lines>{{party.directions}}</ion-item>
+    </ion-list>
+</div>
+
+ </ion-content>
+<!--         
+        <ion-list-header class="listHeader"  no-lines>Going {{party.going.length}}</ion-list-header>
         <ion-row padding>
           <ion-col  class="guests" col-4>
             Brianne Gerron
@@ -61,6 +71,5 @@
             <ion-col col-4>
               Tyrell Gerron
           </ion-col>
-          </ion-row>
-  </ion-list>
-</ion-content>
+          </ion-row> -->
+

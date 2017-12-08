@@ -111,8 +111,12 @@ export class AddFriendPage {
 
       friends.forEach((friend)=>{
         users.forEach((user)=>{
-          console.log(friend.uid, user.uid)
           if(friend.uid == user.uid || firebase.auth().currentUser.uid == user.uid){
+            let index = users.indexOf(user);
+            users.splice(index, 1)
+          }
+          
+          if(firebase.auth().currentUser.uid == user.uid){
             let index = users.indexOf(user);
             users.splice(index, 1)
           }

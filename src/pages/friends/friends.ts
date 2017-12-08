@@ -172,7 +172,7 @@ newFriend:any;
         this.toastCtrl.create({
           message: error.message,
           duration: 3000,
-          position: "top",
+          position: "bottom",
         }).present()
       })
     }
@@ -216,14 +216,14 @@ newFriend:any;
         this.toastCtrl.create({
           message: message,
           duration: 3000,
-          position: "top"
+          position: "bottom"
         }).present()
       })
       .catch((error)=>{
         this.toastCtrl.create({
           message: error.message,
           duration: 3000,
-          position: "top",
+          position: "bottom",
         }).present()
       })
     }
@@ -234,7 +234,7 @@ newFriend:any;
       this.toastCtrl.create({
         message: error.message,
         duration: 3000,
-        position: "top",
+        position: "bottom",
       }).present()
     })
   }
