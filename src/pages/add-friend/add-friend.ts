@@ -46,7 +46,7 @@ export class AddFriendPage {
           this.toastCtrl.create({
             message: "Friend Request Sent",
             duration: 3000,
-            position: "top"
+            position: "bottom"
           }).present()
         }
       }]
@@ -93,27 +93,25 @@ export class AddFriendPage {
     let users = [];
     
     firebase.firestore().collection("users/" + firebase.auth().currentUser.uid + "/friends/")
-    .onSnapshot((friendsSnap)=>{
+    .get().then((friendsSnap)=>{
       friendsSnap.forEach((friend)=>{
         friends.push(friend.data());
       })
-    })
-
-    firebase.firestore().collection("users/")
-    .orderBy("school")
-    .onSnapshot((usersSnap)=>{
-      
-      usersSnap.forEach((user)=>{
-
-          users.push(user.data());
+    }).then((sucess)=>{
+      firebase.firestore().collection("users/")
+      .orderBy("school")
+      .get().then((usersSnap)=>{
         
-      })
-     
+        usersSnap.forEach((user)=>{
   
+            users.push(user.data());
+          
+        })
+    }).then((s)=>{
 
       friends.forEach((friend)=>{
         users.forEach((user)=>{
-         
+          console.log(friend.uid, user.uid)
           if(friend.uid == user.uid || firebase.auth().currentUser.uid == user.uid){
             let index = users.indexOf(user);
             users.splice(index, 1)
@@ -121,6 +119,8 @@ export class AddFriendPage {
         })
       })
       this.allUsers = users;
+    })
+
 
     })
   }

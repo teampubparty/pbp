@@ -152,14 +152,14 @@ newFriend:any;
           this.toastCtrl.create({
             message: "Friend Request has been accepted",
             duration: 3000,
-            position: "top"
+            position: "bottom"
           }).present()
         })
         .catch((error)=>{
           this.toastCtrl.create({
             message: error.message,
             duration: 3000,
-            position: "top",
+            position: "bottom",
           }).present()
         })
       }
