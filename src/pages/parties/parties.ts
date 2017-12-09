@@ -54,9 +54,9 @@ getFriends(){
     }).then((sucess)=>{
   
       friends.forEach((friend)=>{
-        console.log(friend);
+
         parties.forEach((party)=>{
-          console.log(party);
+
           if(friend.uid == party.cid){
             this.friendsParties.push(party);
           }

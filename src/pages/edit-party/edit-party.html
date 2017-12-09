@@ -1,0 +1,55 @@
+
+<ion-header>
+    <ion-navbar>
+      <ion-title *ngIf="party"> Edit {{party.name}}</ion-title>
+    </ion-navbar>
+  </ion-header>
+  
+  <ion-content>
+  
+   
+  <div *ngIf="party">
+      <img src="../assets/imgs/party.jpg" height="250px" width="100%">
+      <div text-center>
+          <button *ngIf="edit != 'yes'"  (click)="openGuestList()" ion-button clear>Guest List</button>
+          <button *ngIf="edit != 'yes'" (click)="edit = 'yes'" ion-button clear>Edit Party</button>
+          <button *ngIf="edit == 'yes'" (click)="confirmCloseEdit()" ion-button clear>Close</button>
+          <button *ngIf="edit == 'yes'"  (click)="confirmSaveEdit()" ion-button clear>Save</button>
+          <button *ngIf="edit != 'yes'" (click)="confirmDeleteParty()" ion-button clear>Delete Party</button>
+      </div>
+      <ion-list>
+          <ion-list-header class="listHeader"  no-lines>Name</ion-list-header>
+          <ion-item no-lines>
+            <ion-input name="name" [(ngModel)]="party.name" [disabled]="edit != 'yes'"></ion-input>
+          </ion-item>
+            <ion-list-header class="listHeader"  no-lines>Date</ion-list-header>
+            <ion-item no-lines>
+                <ion-datetime displayFormat="MM/DD/YYYY"  [(ngModel)]="party.date" [disabled]="edit != 'yes'" pickerFormat="MMM/DD/YYYY" doneText="Select" [min]="today" [max]="2018"></ion-datetime>
+            </ion-item>
+            <ion-list-header class="listHeader"  no-lines>Time</ion-list-header>
+            <ion-item no-lines>
+                <ion-datetime displayFormat="hh:mm A"  [(ngModel)]="party.time" [disabled]="edit != 'yes'" minuteValues="0,15,30,45" doneText="Select" pickerFormat="hh:mm A"></ion-datetime>
+            </ion-item>
+            <ion-list-header class="listHeader"  no-lines>Location</ion-list-header>
+            <ion-item no-lines>
+                <ion-input name="location" [(ngModel)]="party.location" [disabled]="edit != 'yes'"></ion-input>
+            </ion-item>
+            <ion-list-header class="listHeader"  no-lines>Directions</ion-list-header>
+            <ion-item no-lines>
+                <ion-textarea name="directions" rows="6" [(ngModel)]="party.directions" [disabled]="edit != 'yes'"></ion-textarea>
+            </ion-item>
+            <ion-list-header class="listHeader"  no-lines>What we will be doing</ion-list-header>
+            <ion-item no-lines>
+              <ion-textarea rows="6" name="activity" [(ngModel)]="party.activity" [disabled]="edit != 'yes'"></ion-textarea>
+            </ion-item>
+            <ion-list-header class="listHeader"  no-lines>Rules</ion-list-header>
+            <ion-item no-lines>
+                <ion-item no-lines>
+                    <ion-textarea rows="6" name="rules" [(ngModel)]="party.rules" [disabled]="edit != 'yes'"></ion-textarea>
+                  </ion-item>
+            </ion-item>
+
+      </ion-list>
+  </div>
+  
+   </ion-content>

@@ -23,8 +23,18 @@
   </ion-row>
   <ion-list>
         <ion-list-header no-lines class="listHeader">Created</ion-list-header>
+        <ion-item *ngFor="let party of createParties" [navPush]="editParty" [navParams]="party" >
+          
+              {{party.name}}<br>{{party.date}} {{party.time}}
+        </ion-item>
         <ion-list-header no-lines class="listHeader">Going</ion-list-header>
         <ion-list-header no-lines class="listHeader">Invited</ion-list-header>
+        <ion-item *ngFor="let party of invitedParties">
+                {{party.name}}<br>{{party.date}} {{party.time}}
+                <button (click)="viewParty(party)" clear ion-button item-end>View</button>
+                <button (click)="going(party)" clear  ion-button item-end>Going</button>
+                <button (click)="deleteInvite(party)" clear  ion-button item-end>Delete</button>
+          </ion-item>
         <ion-list-header no-lines class="listHeader">Attended</ion-list-header>
       
   </ion-list>
