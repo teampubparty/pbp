@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import * as firebase from 'firebase';
 import 'firebase/firestore'
-import { User } from '../../modals/user';
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 import { ToastController } from 'ionic-angular/components/toast/toast-controller';
 @IonicPage()
@@ -22,77 +21,112 @@ export class AboutPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AboutPage');
-    this.getUser()
+    this.user = this.navParams.data;
   }
 
   user:any
+  edit;
+  closePage(){
+    this.navCtrl.pop();
+  }
 
+
+  confirmDeleteAccount(){
+    this.alertCtrl.create({
+      title: "Delete Account",
+      message: "Are you sure you want to delete your account? This can not be undone.",
+      buttons: [{
+        text: "Cancel"
+      },{
+        text: "Delete Account",
+        handler: data =>{
+          this.deleteAccount()
+        }
+      }]
+    }).present()
+  }
+  deleteAccount(){
+    firebase.auth().currentUser.delete();
+    firebase.firestore().doc("/users/" + firebase.auth().currentUser.uid)
+    .delete().then((sucess)=>{
+      this.logout();
+      this.toastCtrl.create({
+        message: "Your account has been deleted.",
+        position: "bottom",
+        duration: 3000
+      }).present()
+    }).catch((e)=>{
+      this.toastCtrl.create({
+        message: e.message,
+        duration: 3000,
+        position: "bottom"
+      }).present()
+    })
+  }
+
+  confirmSaveEdit(){
+    this.alertCtrl.create({
+      title: "Save Edit Profile",
+      message: "Are you sure you want to save the changes made?",
+      buttons:[{
+        text: "Cancel"
+      },{
+        text: "Save",
+        handler: data=>{
+          this.saveEdit();
+        }
+      }]
+    }).present()
+  }
+  saveEdit(){
+    firebase.firestore().doc("/users/" + firebase.auth().currentUser.uid)
+    .update({
+      age: this.user.age,
+      interests: this.user.interests,
+      major: this.user.major,
+    }).then((sucess)=>{
+      this.toastCtrl.create({
+        message: "Your profile has been updated.",
+        duration: 3000,
+        position: "bottom"
+      }).present()
+    }).catch((error)=>{
+      this.toastCtrl.create({
+        message: error.message,
+        position: "bottom",
+        duration: 3000,
+      }).present()
+    })
+    
+  }
   getUser(){
     let db = firebase.firestore();
     db.doc("users/" + firebase.auth().currentUser.uid)
     .onSnapshot((userSnap)=>{
       this.user = userSnap.data()
     })
-    
   }
-  updateInterest(){
+  confirmCloseEdit(){
     this.alertCtrl.create({
-      title: "Interests",
-      inputs:[{
-        type: "textarea",
-        name: "newInterests",
-        value: this.user.interests,
-        placeholder: "Tell people a little bit about yourself.",
-      }],
+      title: "Close Edit Profile",
+      message: "Any unsaved changes will be deleted.",
       buttons:[{
         text: "Cancel"
       },{
-        text: "Update",
-        handler: data =>{
-          let db = firebase.firestore();
-          db.doc("users/" + firebase.auth().currentUser.uid)
-          .update({
-            interests: data.newInterests
-          })
-          .catch((error)=>{
-            this.toastCtrl.create({
-              message: error.message,
-              duration: 3000,
-              position: "top"
-            })
-          })
+        text: "Close Edit",
+        handler: data=>{
+          this.closeEdit();
         }
       }]
     }).present()
   }
-  updateMajor(){
-    this.alertCtrl.create({
-      title: "Major",
-      inputs:[{
-        type: "textarea",
-        name: "newMajor",
-        value: this.user.major,
-        placeholder: "Tell people your major",
-      }],
-      buttons:[{
-        text: "Cancel"
-      },{
-        text: "Update",
-        handler: data =>{
-          let db = firebase.firestore();
-          db.doc("users/" + firebase.auth().currentUser.uid)
-          .update({
-            major: data.newMajor
-          })
-          .catch((error)=>{
-            this.toastCtrl.create({
-              message: error.message,
-              duration: 3000,
-              position: "top"
-            })
-          })
-        }
-      }]
-    }).present()
+  closeEdit(){
+    this.getUser();
+    this.edit = 'no'; 
+  }
+  logout(){
+    firebase.auth().signOut().then((sucess)=>{
+      this.navCtrl.parent.parent.setRoot("WelcomePage")
+    })
   }
 }

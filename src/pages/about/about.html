@@ -2,31 +2,38 @@
 <ion-header>
 
   <ion-navbar>
+      <ion-buttons start>
+          <button (click)="closePage()" ion-button>
+            <ion-icon style="font-size: 40px" name="close"></ion-icon>
+          </button>
+        </ion-buttons>
     <ion-title  *ngIf="user">{{user.fname}} {{user.lname}}</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
-  
-<ion-list *ngIf="user">
-  <ion-item  no-lines>
-    <strong>School</strong> <p>{{user.school}}</p>
-  </ion-item>
-  <ion-item  no-lines>
-    <strong>Email</strong> <p>{{user.email}}</p>
-  </ion-item>
-  <ion-item  no-lines>
-      <strong>Age</strong> <p>{{user.age}}</p>
-  </ion-item>
-  <ion-item  no-lines>
-      <strong>Interests</strong> <p>{{user.interests}}</p>
-      <button item-end ion-button (click)="updateInterest()" clear>edit</button>
-  </ion-item>
-  <ion-item  no-lines>
-      <strong>Major</strong> <p>{{user.major}}</p>
-      <button item-end ion-button (click)="updateMajor()" clear>edit</button>
-  </ion-item>
-</ion-list>
+<ion-content>
+    <img class="profliePic" src="../assets/imgs/profile.jpg">
+    <img class="cover" src="../assets/imgs/profile.jpg">
+    <div text-center>
+        <button *ngIf="edit != 'yes'" (click)="edit = 'yes'" ion-button clear>Edit</button>
+        <button *ngIf="edit == 'yes'" (click)="confirmCloseEdit()" ion-button clear>Close</button>
+        <button *ngIf="edit == 'yes'"  (click)="confirmSaveEdit()" ion-button clear>Save</button>
+        <button *ngIf="edit != 'yes'" (click)="confirmDeleteAccount()" ion-button clear>Delete Account</button>
+    </div>
+    <ion-list *ngIf="user">
+    <ion-item  no-lines>
+        <ion-label><strong>Age</strong></ion-label>
+        <ion-input name="age" [(ngModel)]="user.age" [disabled]="edit != 'yes'"></ion-input>
+    </ion-item>
+    <ion-item  no-lines>
+        <ion-label><strong>Interests</strong></ion-label>
+        <ion-textarea rows="6" name="interest" [(ngModel)]="user.interests" [disabled]="edit != 'yes'"></ion-textarea>
+    </ion-item>
+    <ion-item  no-lines>
+        <ion-label><strong>Major</strong></ion-label>
+        <ion-input name="major" [(ngModel)]="user.major" [disabled]="edit != 'yes'"></ion-input>
+    </ion-item>
+  </ion-list>
 </ion-content>

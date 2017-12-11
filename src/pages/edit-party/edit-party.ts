@@ -27,8 +27,11 @@ export class EditPartyPage {
     this.party = this.navParams.data;
     this.today = new Date().toISOString();
     this.getParty();
+    this.date = new Date(this.party.date);
+    console.log(this.date)
   }
 
+  date;
   edit;
   party;
   today;
@@ -58,7 +61,7 @@ export class EditPartyPage {
   confirmSaveEdit(){
     this.alertCtrl.create({
       title: "Save Edit Party",
-      message: "Are you sure you want to save changes the changes made?",
+      message: "Are you sure you want to save the changes made?",
       buttons:[{
         text: "Cancel"
       },{
@@ -70,14 +73,16 @@ export class EditPartyPage {
     }).present()
   }
   saveEdit(){
+    let newDate = new Date(this.party.dateString + " " + this.party.timeString);
     firebase.firestore().doc("/parties/" + this.party.pid)
     .update({
       name: this.party.name,
-      date: this.party.date,
+      date: newDate,
+      dateString: this.party.dateString.toDateString(),
+      timeString: this.party.timeString.toDateString(),
       directions: this.party.directions,
       location: this.party.location,
       rules: this.party.rules,
-      time: this.party.time,
       activity: this.party.activity
     }).then((sucess)=>{
       this.toastCtrl.create({

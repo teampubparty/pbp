@@ -1,6 +1,6 @@
 {
   "name": "pbp",
-  "app_id": "",
+  "app_id": "1b0cf0cf",
   "type": "ionic-angular",
   "integrations": {
     "cordova": {}

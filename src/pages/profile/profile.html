@@ -1,12 +1,16 @@
 <ion-header>
   <ion-navbar>
-    <ion-buttons end>
+    <ion-buttons start>
+        <button ion-button (click)="updateProfile(user)">
+            Edit
+        </button>
+        </ion-buttons>
+   <ion-title *ngIf="user">{{user.fname}} {{user.lname}}</ion-title>
+   <ion-buttons end>
         <button ion-button [navPush]="menuPage">
             <ion-icon name="menu"></ion-icon>
           </button>
     </ion-buttons>
-
-   <ion-title *ngIf="user">{{user.fname}} {{user.lname}}</ion-title>
   </ion-navbar>
 </ion-header>
 <ion-content >
@@ -19,23 +23,24 @@
   <ion-row margin-bottom text-center>
     <ion-col tappable (click)="showMessages()">Messages</ion-col>
     <ion-col tappable (click)="showFriends()">Friends</ion-col>
-    <ion-col tappable (click)="showAbout()">About</ion-col>
+    <ion-col tappable (click)="showMyParties()">My Parties</ion-col>
   </ion-row>
-  <ion-list>
-        <ion-list-header no-lines class="listHeader">Created</ion-list-header>
-        <ion-item *ngFor="let party of createParties" [navPush]="editParty" [navParams]="party" >
-          
-              {{party.name}}<br>{{party.date}} {{party.time}}
-        </ion-item>
-        <ion-list-header no-lines class="listHeader">Going</ion-list-header>
-        <ion-list-header no-lines class="listHeader">Invited</ion-list-header>
-        <ion-item *ngFor="let party of invitedParties">
-                {{party.name}}<br>{{party.date}} {{party.time}}
-                <button (click)="viewParty(party)" clear ion-button item-end>View</button>
-                <button (click)="going(party)" clear  ion-button item-end>Going</button>
-                <button (click)="deleteInvite(party)" clear  ion-button item-end>Delete</button>
-          </ion-item>
-        <ion-list-header no-lines class="listHeader">Attended</ion-list-header>
-      
-  </ion-list>
+  <ion-list *ngIf="user">
+      <ion-item  no-lines>
+        <strong>School</strong> <p>{{user.school}}</p>
+      </ion-item>
+      <ion-item  no-lines>
+        <strong>Email</strong> <p>{{user.email}}</p>
+      </ion-item>
+      <ion-item  no-lines>
+          <strong>Age</strong> <p>{{user.age}}</p>
+      </ion-item>
+      <ion-item  no-lines>
+          <strong>Interests</strong> <p>{{user.interests}}</p>
+      </ion-item>
+      <ion-item  no-lines>
+          <strong>Major</strong> <p>{{user.major}}</p>
+      </ion-item>
+    </ion-list>
+
 </ion-content>

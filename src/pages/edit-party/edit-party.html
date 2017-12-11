@@ -24,11 +24,11 @@
           </ion-item>
             <ion-list-header class="listHeader"  no-lines>Date</ion-list-header>
             <ion-item no-lines>
-                <ion-datetime displayFormat="MM/DD/YYYY"  [(ngModel)]="party.date" [disabled]="edit != 'yes'" pickerFormat="MMM/DD/YYYY" doneText="Select" [min]="today" [max]="2018"></ion-datetime>
+                <ion-datetime displayFormat="MM/DD/YYYY"  [(ngModel)]="party.d" [disabled]="edit != 'yes'" pickerFormat="MMM/DD/YYYY" doneText="Select" [min]="today" [max]="2018"></ion-datetime>
             </ion-item>
             <ion-list-header class="listHeader"  no-lines>Time</ion-list-header>
             <ion-item no-lines>
-                <ion-datetime displayFormat="hh:mm A"  [(ngModel)]="party.time" [disabled]="edit != 'yes'" minuteValues="0,15,30,45" doneText="Select" pickerFormat="hh:mm A"></ion-datetime>
+                <ion-datetime displayFormat="hh:mm A"  [(ngModel)]="party.t" [disabled]="edit != 'yes'" minuteValues="0,15,30,45" doneText="Select" pickerFormat="hh:mm A"></ion-datetime>
             </ion-item>
             <ion-list-header class="listHeader"  no-lines>Location</ion-list-header>
             <ion-item no-lines>

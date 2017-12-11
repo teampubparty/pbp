@@ -17,7 +17,7 @@ export class CreatePartyPage {
     public alertCtrl:AlertController,
     public navCtrl: NavController, 
     public navParams: NavParams) {
-    this.getCurrentDate()
+    this.getCurrentDate();
   }
 
   today;
@@ -38,10 +38,14 @@ export class CreatePartyPage {
     let key = firebase.firestore().collection("/parties/").doc().id;
     let form = partyForm.value;
     let partyRef = firebase.firestore().doc("/parties/" + key);
+    let newDate = new Date(form.date + " " + form.time);
     let data = {
         name: form.name,
-        date: form.date,
-        time: form.time,
+        date: newDate,
+        d: form.date,
+        t: form.time,
+        dateString: newDate.toDateString(),
+        timeString: newDate.toLocaleTimeString(),
         location: form.location,
         directions: form.directions,
         activity: form.activity,

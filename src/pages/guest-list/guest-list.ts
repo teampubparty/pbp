@@ -95,8 +95,9 @@ confirmSendInvite(user){
         status: "Invited",
         pid: this.party.pid,
         name: this.party.name,
-        date: this.party.date,
-        time: this.party.time,
+        date: this.party.date, 
+        dateString: this.party.dateString,
+        timeString: this.party.timeString,
         cFname: cUser.fname,
         cLname: cUser.lname,
         })
