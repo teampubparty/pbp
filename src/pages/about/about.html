@@ -7,22 +7,26 @@
             <ion-icon style="font-size: 40px" name="close"></ion-icon>
           </button>
         </ion-buttons>
-    <ion-title  *ngIf="user">{{user.fname}} {{user.lname}}</ion-title>
+    <ion-title>Edit Profile</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content>
-    <img class="profliePic" src="../assets/imgs/profile.jpg">
-    <img class="cover" src="../assets/imgs/profile.jpg">
+    <div  *ngIf="user">
+
+   
+    <img class="profliePic" src="user.pic">
+    <img  class="cover" src="../assets/imgs/profile.jpg">
+    <button ion-button (click)="getPhoto()">Take Photo</button>
     <div text-center>
         <button *ngIf="edit != 'yes'" (click)="edit = 'yes'" ion-button clear>Edit</button>
         <button *ngIf="edit == 'yes'" (click)="confirmCloseEdit()" ion-button clear>Close</button>
         <button *ngIf="edit == 'yes'"  (click)="confirmSaveEdit()" ion-button clear>Save</button>
         <button *ngIf="edit != 'yes'" (click)="confirmDeleteAccount()" ion-button clear>Delete Account</button>
     </div>
-    <ion-list *ngIf="user">
+    <ion-list>
     <ion-item  no-lines>
         <ion-label><strong>Age</strong></ion-label>
         <ion-input name="age" [(ngModel)]="user.age" [disabled]="edit != 'yes'"></ion-input>
@@ -36,4 +40,5 @@
         <ion-input name="major" [(ngModel)]="user.major" [disabled]="edit != 'yes'"></ion-input>
     </ion-item>
   </ion-list>
+</div>
 </ion-content>

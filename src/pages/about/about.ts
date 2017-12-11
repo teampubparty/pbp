@@ -1,9 +1,11 @@
+import { Camera, CameraOptions} from '@ionic-native/camera';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import * as firebase from 'firebase';
 import 'firebase/firestore'
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 import { ToastController } from 'ionic-angular/components/toast/toast-controller';
+
 @IonicPage()
 @Component({
   selector: 'page-about',
@@ -12,6 +14,7 @@ import { ToastController } from 'ionic-angular/components/toast/toast-controller
 export class AboutPage {
 
   constructor(
+    public camera: Camera,
     public navCtrl: NavController, 
     public navParams: NavParams,
     public alertCtrl: AlertController,
@@ -30,7 +33,47 @@ export class AboutPage {
     this.navCtrl.pop();
   }
 
+async  getPhoto(){
+  // Current user id
+  let uid = firebase.auth().currentUser.uid;
+  try {
+    let options: CameraOptions = {
+      quality: 50,
+      targetHeight: 600,
+      sourceType: 0,
+      targetWidth: 600,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+      correctOrientation: true,
+      
+    }
+  
+ 
 
+   let result = await this.camera.getPicture(options);
+   let picRef = '/pictures/profile/' + uid + "/profile.pic"
+   let pictures = firebase.storage().ref(picRef);
+   let image = `data:image/jpeg;base64,${result}`
+   pictures.putString(image, `data_url`).then((sucess)=>{
+     
+     pictures.getDownloadURL().then((url)=>{
+      firebase.firestore().doc("/users/" + uid)
+      .update({
+        pic: url,
+      })
+     })
+
+    
+   })
+
+
+
+
+    } catch(e){
+      console.log(e);
+    }
+  }
   confirmDeleteAccount(){
     this.alertCtrl.create({
       title: "Delete Account",
