@@ -17,7 +17,7 @@
     <div  *ngIf="user">
 
    
-    <img class="profliePic" src="user.pic">
+    <img class="profliePic" src="{{user.pic}}">
     <img  class="cover" src="../assets/imgs/profile.jpg">
     <button ion-button (click)="getPhoto()">Take Photo</button>
     <div text-center>

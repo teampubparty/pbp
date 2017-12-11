@@ -18,8 +18,8 @@ $app-direction: ltr;
 
 
 // Custom Styles
-$toolbar-background: #123456;
-$tabs-background: #123456;
+$toolbar-background: #9c528b;
+$tabs-background: #9c528b;
 $tabs-tab-color-active: #fff;
 $background-color: #f4f4f4;
 $list-background-color: #fff;
@@ -30,8 +30,11 @@ $list-border-color: white;
 // The "primary" color is the only required color in the map.
 
 $colors: (
-  primary:    #123456,
-  secondary:  skyblue,
+  primary:  #9c528b,
+  secondary:    #123456,
+  color2:  #d7cdcc,
+  color3:  #ffffff,
+  color4:  #59656f,
   danger:     #f53d3d,
   light:      #f4f4f4,
   dark:       #000
@@ -83,10 +86,10 @@ $colors: (
 @import "roboto";
 @import "noto-sans";
 @font-face {
-  font-family: "NotoSans";
-  src: url("../assets/fonts/NotoSans-Regular.ttf") format("truetype");
+  font-family: "IndieFlower";
+  src: url("../assets/fonts/IndieFlower.ttf") format("truetype");
 }
 
 *{
-  font-family: NotoSans;
+  font-family: IndieFlower;
 }

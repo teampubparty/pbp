@@ -6,12 +6,20 @@
 </div>
 
 <div padding>
-  <button ion-button block (click)="showLoginPage()" class="loginButton">
-   Login
-  </button>
-  <button ion-button block (click)="showRegisterPage()" class="registerButton">
-    Register
-  </button>
+  <ion-row>
+    <ion-col>
+        <button ion-button clear block (click)="showLoginPage()" class="loginButton">
+            Login
+           </button>
+    </ion-col>
+    <ion-col>
+        <button ion-button clear block (click)="showRegisterPage()" class="registerButton">
+            Sign Up
+          </button>
+    </ion-col>
+  </ion-row>
+
+
   
 </div>
 

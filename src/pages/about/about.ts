@@ -20,11 +20,13 @@ export class AboutPage {
     public alertCtrl: AlertController,
     public toastCtrl: ToastController
   ) {
+   
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AboutPage');
     this.user = this.navParams.data;
+    console.log(this.user.pic);
   }
 
   user:any
