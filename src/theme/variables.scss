@@ -18,8 +18,8 @@ $app-direction: ltr;
 
 
 // Custom Styles
-$toolbar-background: #9c528b;
-$tabs-background: #9c528b;
+$toolbar-background: #030056;
+$tabs-background: #030056;
 $tabs-tab-color-active: #fff;
 $background-color: #f4f4f4;
 $list-background-color: #fff;
@@ -86,10 +86,10 @@ $colors: (
 @import "roboto";
 @import "noto-sans";
 @font-face {
-  font-family: "IndieFlower";
-  src: url("../assets/fonts/IndieFlower.ttf") format("truetype");
+  font-family: "Kavivanar-Regular";
+  src: url("../assets/fonts/Kavivanar-Regular.ttf") format("truetype");
 }
 
 *{
-  font-family: IndieFlower;
+  font-family: Kavivanar-Regular;
 }

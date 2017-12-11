@@ -1,13 +1,14 @@
 page-welcome {
 
 
+    
     .logo{
         font-size: 50px;
         text-align: center;
         font-weight: bold;
         margin-bottom: 200px;
         margin-top: 100px;
-        color:#9c528b;
+        color:#030056;
     }
 
     .loginButton {
@@ -21,6 +22,9 @@ page-welcome {
         font-weight: bold;
     }
     .scroll-content {
-        background-color: #f4f4f4;
+        // background-image: url('../../assets/imgs/bg.jpg');
+        // background-position: center;
+        // background-repeat: no-repeat;
+        // background-size: cover;
     }
 }
