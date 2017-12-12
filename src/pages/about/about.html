@@ -17,9 +17,11 @@
     <div  *ngIf="user">
 
    
-    <img class="profliePic" src="{{user.pic}}">
-    <img  class="cover" src="../assets/imgs/profile.jpg">
-    <button ion-button (click)="getPhoto()">Take Photo</button>
+            <p text-center>
+                    <img class="profliePic" src="{{user.pic}}" /><br>
+                    <span  *ngIf="edit == 'yes'"   (click)="getPhoto()">Update Picture</span>
+                  </p>
+    <!-- <button ion-button clear </button> -->
     <div text-center>
         <button *ngIf="edit != 'yes'" (click)="edit = 'yes'" ion-button clear>Edit</button>
         <button *ngIf="edit == 'yes'" (click)="confirmCloseEdit()" ion-button clear>Close</button>

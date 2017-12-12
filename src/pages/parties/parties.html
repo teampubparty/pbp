@@ -24,13 +24,13 @@
 <ion-card *ngFor="let p of friendsParties">
     <ion-item [navPush]="PartyPage" [navParams]="p">
       <ion-avatar item-start>
-        <img src="./assets/imgs/avatar.png">
+        <img src="{{p.cPic}}">
       </ion-avatar>
       <h2>{{p.name}}</h2>
       <p>{{p.dateString}} {{p.timeString}}</p>
     </ion-item>
   
-    <img src=".//assets/imgs/party.jpg">
+    <img src="{{p.pic}}">
   
     <ion-card-content>
       <p>{{p.activity}}</p>

@@ -9,7 +9,8 @@
   
    
   <div *ngIf="party">
-      <img src="../assets/imgs/party.jpg" height="250px" width="100%">
+      <img src="{{coverUrl}}" height="250px" width="100%">
+      <p  *ngIf="edit == 'yes'" text-center   (click)="updateCover()">Update Picture</p>
       <div text-center>
           <button *ngIf="edit != 'yes'"  (click)="openGuestList()" ion-button clear>Guest List</button>
           <button *ngIf="edit != 'yes'" (click)="edit = 'yes'" ion-button clear>Edit Party</button>

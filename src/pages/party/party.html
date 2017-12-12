@@ -9,7 +9,7 @@
 
  
 <div *ngIf="party">
-    <img src="../assets/imgs/party.jpg" height="250px" width="100%">
+    <img src="{{party.pic}}" height="250px" width="100%">
   <ion-row text-center margin-bottom>
     <ion-col *ngIf="requestStatus == 'Invited'" >Invited</ion-col>
     <ion-col *ngIf="requestStatus == 'Requesting Invite'" (click)="confirmCancelRequest()" >Cancel Request</ion-col>

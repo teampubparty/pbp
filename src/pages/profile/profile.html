@@ -14,18 +14,18 @@
   </ion-navbar>
 </ion-header>
 <ion-content >
-       <img class="profliePic" src="../assets/imgs/profile.jpg">
-          <img class="cover" src="../assets/imgs/profile.jpg">
+  <div  *ngIf="user">
 
+          <p text-center>
+              <img class="profliePic" src="{{user.pic}}" />
+            </p>
 
-
-
-  <ion-row margin-bottom text-center>
+<ion-row margin-bottom text-center>
     <ion-col tappable (click)="showMessages()">Messages</ion-col>
     <ion-col tappable (click)="showFriends()">Friends</ion-col>
     <ion-col tappable (click)="showMyParties()">My Parties</ion-col>
   </ion-row>
-  <ion-list *ngIf="user">
+  <ion-list>
       <ion-item  no-lines>
         <strong>School</strong> <p>{{user.school}}</p>
       </ion-item>
@@ -41,6 +41,8 @@
       <ion-item  no-lines>
           <strong>Major</strong> <p>{{user.major}}</p>
       </ion-item>
-    </ion-list>
+    </ion-list> 
 
+  </div>
+  
 </ion-content>

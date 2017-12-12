@@ -6,6 +6,7 @@ import { AlertController } from 'ionic-angular/components/alert/alert-controller
 import { ToastController } from 'ionic-angular/components/toast/toast-controller';
 import { messaging } from 'firebase';
 import { ModalController } from 'ionic-angular/components/modal/modal-controller';
+import { Camera, CameraOptions } from '@ionic-native/camera';
 
 @IonicPage()
 @Component({
@@ -15,6 +16,7 @@ import { ModalController } from 'ionic-angular/components/modal/modal-controller
 export class EditPartyPage {
 
   constructor(
+    public camera: Camera,
     public modalCtrl: ModalController,
     public toastCtrl: ToastController,
     public alertCtrl: AlertController,
@@ -28,14 +30,14 @@ export class EditPartyPage {
     this.today = new Date().toISOString();
     this.getParty();
     this.date = new Date(this.party.date);
-    console.log(this.date)
+    this.coverUrl = this.party.pic;
   }
 
   date;
   edit;
   party;
   today;
-
+  coverUrl;
 
   openGuestList(){
     this.modalCtrl.create("GuestListPage", this.party).present();
@@ -73,13 +75,16 @@ export class EditPartyPage {
     }).present()
   }
   saveEdit(){
-    let newDate = new Date(this.party.dateString + " " + this.party.timeString);
+    let newDate = new Date(this.party.d + " " + this.party.t);
     firebase.firestore().doc("/parties/" + this.party.pid)
     .update({
       name: this.party.name,
+      pic: this.coverUrl,
       date: newDate,
-      dateString: this.party.dateString.toDateString(),
-      timeString: this.party.timeString.toDateString(),
+      d: this.party.d,
+      t: this.party.t,
+      dateString: newDate.toDateString(),
+      timeString: newDate.toLocaleTimeString(),
       directions: this.party.directions,
       location: this.party.location,
       rules: this.party.rules,
@@ -136,4 +141,43 @@ export class EditPartyPage {
       this.party = partySnap.data();
     })
   }
+  
+  async  updateCover(){
+    // Current user id
+    let uid = firebase.auth().currentUser.uid;
+    try {
+      let options: CameraOptions = {
+        quality: 100,
+        targetHeight: 600,
+        sourceType: 0,
+        targetWidth: 600,
+        destinationType: this.camera.DestinationType.DATA_URL,
+        encodingType: this.camera.EncodingType.JPEG,
+        mediaType: this.camera.MediaType.PICTURE,
+        correctOrientation: true,
+        
+      }
+    
+   
+  
+     let result = await this.camera.getPicture(options);
+     let picRef = '/pictures/party/' + this.party.pid + "/cover.pic"
+     let pictures = firebase.storage().ref(picRef);
+     let image = `data:image/jpeg;base64,${result}`
+     pictures.putString(image, `data_url`).then((sucess)=>{
+       
+       pictures.getDownloadURL().then((url)=>{
+        this.coverUrl = url
+       })
+  
+      
+     })
+  
+  
+  
+  
+      } catch(e){
+        console.log(e);
+      }
+    }
 }
