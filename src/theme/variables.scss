@@ -18,8 +18,8 @@ $app-direction: ltr;
 
 
 // Custom Styles
-$toolbar-background: #030056;
-$tabs-background: #030056;
+$toolbar-background: #60b0f4;
+$tabs-background: #60b0f4;
 $tabs-tab-color-active: #fff;
 $background-color: #f4f4f4;
 $list-background-color: #fff;
@@ -85,6 +85,10 @@ $colors: (
 
 @import "roboto";
 @import "noto-sans";
+@font-face {
+  font-family: "Courgette";
+  src: url("../assets/fonts/Courgette-Regular.ttf") format("truetype");
+}
 @font-face {
   font-family: "Kavivanar-Regular";
   src: url("../assets/fonts/Kavivanar-Regular.ttf") format("truetype");
