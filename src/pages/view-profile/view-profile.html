@@ -1,16 +1,11 @@
 <ion-header>
   <ion-navbar>
-    <ion-buttons start>
-        <button ion-button (click)="updateProfile(user)">
-            Edit
-        </button>
+      <ion-buttons start>
+          <button (click)="closePage()" ion-button>
+            <ion-icon style="font-size: 40px" name="close"></ion-icon>
+          </button>
         </ion-buttons>
    <ion-title *ngIf="user">{{user.fname}} {{user.lname}}</ion-title>
-   <ion-buttons end>
-        <button ion-button [navPush]="menuPage">
-            <ion-icon name="menu"></ion-icon>
-          </button>
-    </ion-buttons>
   </ion-navbar>
 </ion-header>
 <ion-content >
@@ -19,12 +14,6 @@
           <p text-center>
               <img class="profliePic" src="{{user.pic}}" />
             </p>
-
-<ion-row margin-bottom text-center>
-    <!-- <ion-col tappable (click)="showMessages()">Messages <ion-badge *ngIf="newMessages != 0" >{{newMessages}}</ion-badge></ion-col> -->
-    <ion-col tappable (click)="showFriends()">Friends <ion-badge *ngIf="newFriends != 0">{{newFriends}}</ion-badge></ion-col>
-    <ion-col tappable (click)="showMyParties()">My Parties <ion-badge *ngIf="newRequests != 0">{{newRequests}}</ion-badge></ion-col>
-  </ion-row>
   <ion-list>
       <ion-item  no-lines>
         <strong>School</strong> <p>{{user.school}}</p>

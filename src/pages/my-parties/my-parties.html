@@ -11,7 +11,7 @@
     <ion-list>
         <ion-list-header no-lines class="listHeader">Created</ion-list-header>
         <ion-item *ngFor="let party of createParties" [navPush]="editParty" [navParams]="party" >
-              {{party.name}}<br>{{party.dateString}} {{party.timeString}}
+              {{party.name}}<br>{{party.dateString}} {{party.timeString}}<br> 
         </ion-item>
         <ion-list-header no-lines class="listHeader">Going</ion-list-header>
         <ion-item *ngFor="let party of goingParties">

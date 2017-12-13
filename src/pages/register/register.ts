@@ -45,7 +45,8 @@ export class RegisterPage {
         school: form.school,
         email: form.email,
         age: form.age,
-        uid: userid
+        uid: userid,
+        pic: "/../../assets/imgs/defaultProfile.png"
       })
       this.navCtrl.setRoot("VerificationPage")
     })

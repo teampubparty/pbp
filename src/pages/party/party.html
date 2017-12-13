@@ -14,7 +14,8 @@
     <ion-col *ngIf="requestStatus == 'Invited'" >Invited</ion-col>
     <ion-col *ngIf="requestStatus == 'Requesting Invite'" (click)="confirmCancelRequest()" >Cancel Request</ion-col>
     <ion-col *ngIf="requestStatus == 'No Invite Status'" (click)="confirmRequestInvite()" >Request Invite</ion-col>
-    <ion-col>Message Host</ion-col>
+    <ion-col (click)="viewProfile()">View Host Profile</ion-col>
+    <!-- <ion-col>Message Host</ion-col> -->
   </ion-row>
     <ion-list>
           <ion-list-header class="listHeader"  no-lines>What we will be doing</ion-list-header>

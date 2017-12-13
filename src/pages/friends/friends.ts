@@ -27,6 +27,7 @@ export class FriendsPage {
     this.getFriends();
     this.getFriendRequest();
     this.getPendingFriends();
+    this.getNewFriends();
  
   }
 
@@ -39,7 +40,16 @@ requestsLength:number;
 pendingLength:number;
 oldFriend:any;
 newFriend:any;
+newFriends:any;
 
+
+getNewFriends(){
+  firebase.firestore().collection("/users/" + firebase.auth().currentUser.uid + "/friends/")
+  .where("status", "==", "Friend Requests")
+  .onSnapshot((friendsSnap)=>{
+    this.newFriends = friendsSnap.docs.length
+  })
+}
   getFriends(){
     firebase.firestore()
     .collection("users/" + firebase.auth().currentUser.uid + "/friends/")
@@ -166,7 +176,8 @@ newFriend:any;
     acceptfriendOtherUser(user){
       firebase.firestore().doc("users/" + user.uid + "/friends/" + firebase.auth().currentUser.uid)
       .update({
-        status: "Friends"
+        status: "Friends",
+        new: "yes"
       })
       .catch((error)=>{
         this.toastCtrl.create({
@@ -241,6 +252,7 @@ newFriend:any;
   viewProfile(){
     this.navCtrl.push("ProfilePage")
   }
+
 
 
 }

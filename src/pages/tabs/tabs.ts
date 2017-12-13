@@ -16,9 +16,9 @@ export class TabsPage {
   MessagesPage:string = "MessagesPage";
   FriendsPage:string = "FriendsPage";
   ProfilePage:string = "ProfilePage";
-  
   ionViewDidLoad() {
     console.log('ionViewDidLoad TabsPage');
+
   }
 
 }

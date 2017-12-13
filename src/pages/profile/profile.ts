@@ -16,6 +16,9 @@ export class ProfilePage {
     public navCtrl: NavController, 
     public navParams: NavParams) {
     this.getUser();
+    this.getNewFriends();
+    this.getNewMessages();
+    this.getNewPartyRequests();
   }
 
   getUser(){
@@ -27,6 +30,9 @@ export class ProfilePage {
   }
 user:any;
 menuPage= "MenuPage";
+newMessages;
+newFriends;
+newRequests;
 
   showMessages(){
     this.navCtrl.push("MessagesPage");
@@ -39,5 +45,24 @@ menuPage= "MenuPage";
   }
   updateProfile(user){
     this.modalCtrl.create("AboutPage", user).present()
+  }
+
+  getNewMessages(){
+    this.newMessages = 1;
+  }
+
+  getNewFriends(){
+    firebase.firestore().collection("/users/" + firebase.auth().currentUser.uid + "/friends/")
+    .where("status", "==", "Friend Requests")
+    .onSnapshot((friendsSnap)=>{
+      this.newFriends = friendsSnap.docs.length
+    })
+  }
+  getNewPartyRequests(){
+    firebase.firestore().collection("/users/" + firebase.auth().currentUser.uid + "/parties/")
+    .where("status", "==", "Requesting Invite")
+    .onSnapshot((partySnap)=>{
+      this.newRequests = partySnap.docs.length
+    })
   }
 }

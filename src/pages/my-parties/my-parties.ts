@@ -22,7 +22,7 @@ export class MyPartiesPage {
   createParties = [];
   invitedParties = [];
   goingParties = [];
-
+  newRequests: any;
   editParty = "EditPartyPage";
 
   ionViewDidLoad() {
@@ -35,6 +35,7 @@ export class MyPartiesPage {
 
 
 
+  
 getCreatedParties(){
   console.log("create parties");
   this.createParties = [];

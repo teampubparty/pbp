@@ -73,6 +73,7 @@ export class AddFriendPage {
         school: currentUser.school,
         uid: currentUser.uid,
         status: "Friend Requests",
+        new: "yes"
       };
        firebase.firestore()
        .doc("users/" + currentUser.uid + "/friends/" + user.uid).set(requestor);

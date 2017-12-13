@@ -34,7 +34,7 @@
     </ion-item>
     </div>
     <div id="requests" *ngIf="requestsLength != 0">
-        <ion-list-header>Requests</ion-list-header>
+        <ion-list-header>Requests <ion-badge *ngIf="newFriends != 0"> {{newFriends}}</ion-badge></ion-list-header>
       <ion-item *ngFor="let request of friendRequests" class="item" no-lines >
         <ion-thumbnail item-start>
             <img src="../assets/imgs/profile.jpg">

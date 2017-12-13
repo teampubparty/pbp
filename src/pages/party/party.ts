@@ -4,6 +4,7 @@ import { AlertController } from 'ionic-angular/components/alert/alert-controller
 import { ToastController } from 'ionic-angular/components/toast/toast-controller';
 import * as firebase from 'firebase';
 import 'firebase/firestore';
+import { ModalController } from 'ionic-angular/components/modal/modal-controller';
 
 
 @IonicPage()
@@ -14,6 +15,7 @@ import 'firebase/firestore';
 export class PartyPage {
 
   constructor(
+    public modalCtrl: ModalController,
     public alertCtrl: AlertController,
     public toastCtrl: ToastController,
     public navCtrl: NavController, 
@@ -125,5 +127,9 @@ export class PartyPage {
     .catch((error)=>{
       console.log(error.message)
     })
+  }
+
+  viewProfile():void{
+    this.modalCtrl.create("ViewProfilePage", this.party).present()
   }
 }
