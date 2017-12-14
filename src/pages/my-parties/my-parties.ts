@@ -98,17 +98,20 @@ viewParty(party){
 }
 
   going(party){
+
+    //Current User
     let cUser;
     firebase.firestore().doc("/users/" + firebase.auth().currentUser.uid)
     .get().then((userSnap)=>{
       cUser = userSnap.data();
       firebase.firestore().doc("/parties/" + party.pid + "/invited/" + cUser.uid)
       .update({
-        status: "Going"
+        status: "Going",
       }).then((sucess)=>{
         firebase.firestore().doc("/users/" + cUser.uid + "/parties/" + party.pid)
         .update({
-          status: "Going"
+          status: "Going",
+
         }).then((s)=>{
           this.getAttendedParties();
           this.getInviteParties();

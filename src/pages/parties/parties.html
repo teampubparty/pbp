@@ -17,24 +17,57 @@
   <ion-refresher-content>
   </ion-refresher-content>
 </ion-refresher>
-<div *ngIf="friendsParties.length == 0">
-  <p text-center style="font-weight: bold; font-size: 16px">None of your friends are doing anything.<br> Add some new ones</p>
-</div>
 
-<ion-card *ngFor="let p of friendsParties">
-    <ion-item [navPush]="PartyPage" [navParams]="p">
-      <ion-avatar item-start>
-        <img src="{{p.cPic}}">
-      </ion-avatar>
-      <h2>{{p.name}}</h2>
-      <p>{{p.dateString}} {{p.timeString}}</p>
-    </ion-item>
-  
-    <img src="{{p.pic}}">
-  
-    <ion-card-content>
-      <p>{{p.activity}}</p>
-    </ion-card-content>
-  </ion-card>
+<!-- <div>
+  <ion-row text-center>
+    <ion-col> <button ion-button clear (click)="viewFriends()">Friends</button></ion-col>
+    <ion-col> <button ion-button clear (click)="viewTop()">Top Parties</button></ion-col>
+  </ion-row>
+</div> -->
+
+<div *ngIf="view == 'friends'">
+
+  <div *ngIf="friendsParties.length == 0">
+    <p text-center style="font-weight: bold; font-size: 16px">None of your friends are doing anything.<br> Add some new ones</p>
+  </div>
+  <ion-card *ngFor="let p of friendsParties">
+      <ion-item [navPush]="PartyPage" [navParams]="p">
+        <ion-avatar item-start>
+          <img src="{{p.cPic}}">
+        </ion-avatar>
+        <h2>{{p.name}}</h2>
+        <p>{{p.dateString}} {{p.timeString}}</p>
+      </ion-item>
+    
+      <img src="{{p.pic}}">
+    
+      <ion-card-content>
+        <p>{{p.activity}}</p>
+      </ion-card-content>
+    </ion-card>
+
+</div>
+<div *ngIf="view == 'top'">
+
+  <div *ngIf="friendsParties.length == 0">
+    <p text-center style="font-weight: bold; font-size: 16px">No parties have been added.<br> Don't be shy, create one.</p>
+  </div>
+  <ion-card *ngFor="let p of friendsParties">
+      <ion-item [navPush]="PartyPage" [navParams]="p">
+        <ion-avatar item-start>
+          <img src="{{p.cPic}}">
+        </ion-avatar>
+        <h2>{{p.name}}</h2>
+        <p>{{p.dateString}} {{p.timeString}}</p>
+      </ion-item>
+    
+      <img src="{{p.pic}}">
+    
+      <ion-card-content>
+        <p>{{p.activity}}</p>
+      </ion-card-content>
+    </ion-card>
+
+</div>
 
 </ion-content>

@@ -19,10 +19,12 @@ export class PartiesPage {
   view:string;
   friendsParties = [];
   friends = [];
+  topParties = [];
   PartyPage = "PartyPage"
   ionViewDidLoad() {
     console.log('ionViewDidLoad PartiesPage');
     this.getFriends();
+    this.view="friends";
   }
 
   showCreateParty(){
@@ -70,7 +72,10 @@ getFriends(){
  
 
 }
-
+ getTopParties(){
+   firebase.firestore().collection("/parties/")
+   .orderBy("")
+ }
 doRefresh(refresher) {
 
   setTimeout(() => {
@@ -79,6 +84,11 @@ doRefresh(refresher) {
   }, 2000);
 }
 
-
+viewFriends(){
+  this.view = "friends"
+}
+viewTop(){
+  this.view = "top"
+}
 
 }
